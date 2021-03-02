@@ -9,7 +9,6 @@ function App() {
     loading,
   } = useGlobalContext()
 	
-	
 	if (loading) {
 		return <Loading />
 	}

@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.resume-holder {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.resume-holder > section {
+	width:48%
+}
+
+.resume-preview {
+	display: flex;
+	flex-flow: column wrap;
+}
