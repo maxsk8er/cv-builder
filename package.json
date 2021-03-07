@@ -3,12 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^26.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.0",
+    "font-picker-react": "^3.5.2",
+    "mobx": "^6.1.8",
+    "mobx-react": "^7.1.0",
+    "mobx-react-lite": "^3.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-html-parser": "^2.0.2",
     "react-scripts": "4.0.3",
+    "react-to-print": "^2.12.3",
+    "react-uuid": "^1.0.2",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
@@ -34,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^5.0.0"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from './Loading'
-import ResumeForm from './ResumeForm'
-import { useGlobalContext } from './context'
+import Resume from './Resume'
+import { useGlobalContext } from './utils/context'
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 		return <Loading />
 	}
 
-	return <ResumeForm />
+	return <Resume />
 }
 
 export default App;

@@ -1,0 +1,75 @@
+
+ol,
+ul {
+	list-style: none outside none;
+	padding: 0;
+	margin: 0;
+}
+
+.resume-holder {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.resume-holder>section {
+	width: 48%
+}
+
+.resume-preview {
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.resume-form,
+.resume-form .form-control {
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.resume-form form {
+	width: 100%;
+	padding: 4px;
+	box-sizing: border-box;
+}
+
+.resume-form .form-control {
+	width: 100%;
+	margin-bottom: 24px;
+	display: inline-block;
+}
+
+.resume-form .form-control label {
+	display: inline-block;
+	font-size: 16px;
+	margin-bottom: 12px;
+}
+
+.resume-form .form-control input {
+	display: inline-block;
+	font-size: 16px;
+	color: var(--font-color);
+	width: 100%;
+	background-color: transparent;
+	border: 1px solid #9e9e9e;
+	border-radius: 4px;
+	outline: none;
+	height: 3rem;
+	font-size: 16px;
+	margin: 0 0 8px 0;
+	padding: 0;
+	box-sizing: content-box;
+	padding: 4px;
+}
+
+.elements-panel>ul {
+	box-sizing: border-box;
+	padding: 4px;
+	display: flex;
+	flex-flow: row wrap;
+
+}
+.elements-panel>ul>li {
+	margin-right: 8px;
+	cursor: pointer;
+}
