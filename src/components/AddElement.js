@@ -1,20 +1,26 @@
 import { useGlobalContext } from '../utils/context'
-import elemntsSelect from '../store/elemntsSelect'
+import Modal from '../Modal'
 
 const AddElement = () => {
-	const { elementsTemplate } = useGlobalContext()
+	const { elementsTemplate, openModal } = useGlobalContext()
+	const handleClick = () => {
+		openModal()
+		//elementsTemplate.changeElement(id, data)
+	}
 	return (
 		<section className='elements-panel'>
+			<Modal />
 			<ul>
 				<li>
-					<button className='btn' onClick={() => elementsTemplate.addElement(elemntsSelect[0])}>
-						Add Simple Input
+				{/* () => elementsTemplate.addElement(elemntsSelect[0]) */}
+					<button className='btn' onClick={handleClick}>
+						Add Input
 					</button>
 				</li>
-				<li>Add TextArea</li>
 			</ul>
 		</section>
 	)
+	
 }
 
 export default AddElement;

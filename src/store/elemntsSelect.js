@@ -1,7 +1,6 @@
-import uuid from 'react-uuid'
 const elementsSelect = [
 	{
-		id: uuid(),
+		id: 0,
 		el: 'textarea',
 		val: ''
 	},

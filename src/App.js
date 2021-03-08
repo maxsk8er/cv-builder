@@ -12,7 +12,6 @@ function App() {
 	if (loading) {
 		return <Loading />
 	}
-
 	return <Resume />
 }
 

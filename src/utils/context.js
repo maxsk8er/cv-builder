@@ -2,10 +2,10 @@ import React, { useState, useContext } from 'react'
 import ElementsStore from '../store/elemntsStore';
 
 const AppContext = React.createContext()
+const elementsStore= new ElementsStore()
 
 const AppProvider = ({ children }) => {
 
-	const elementsStore= new ElementsStore()
 	//const [templateBase, setTemplateBase] = useState(templateBaseObj)
 	// const templateBaseObj =elementsStore.elemnts
 
@@ -28,11 +28,18 @@ const AppProvider = ({ children }) => {
 	// 	)
 	// 	setTemplateBase(newTemplateBase)
 	// }
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const openModal = () => {
+    setIsModalOpen(true)
+  }
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
 
 	const [loading, setLoading] = useState(false)
 
 	return (
-		<AppContext.Provider value={{ elementsTemplate: elementsStore, loading, setLoading }}>
+		<AppContext.Provider value={{ elementsTemplate: elementsStore, openModal, closeModal,isModalOpen, loading, setLoading }}>
 			{children}
 		</AppContext.Provider>
 	)

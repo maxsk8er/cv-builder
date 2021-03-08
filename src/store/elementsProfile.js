@@ -3,7 +3,7 @@ import uuid from 'react-uuid'
 const elementsProfile =[
 	{
 		id: uuid(),
-		order: 1,
+		order: 2,
 		el: 'input',
 		tip: 'text',
 		lab: 'Nome',
@@ -11,7 +11,7 @@ const elementsProfile =[
 	},
 	{
 		id: uuid(),
-		order: 2,
+		order: 1,
 		el: 'input',
 		tip: 'text',
 		lab: 'Posicao',

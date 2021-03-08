@@ -1,10 +1,12 @@
 import { makeAutoObservable } from 'mobx'
 import elementsBase from './elementsProfile'
+import uuid from 'react-uuid'
 
 export default class ElementsStore {
 	constructor() {
 		this._elements = elementsBase
-		makeAutoObservable(this, {}, { deep: true })
+		makeAutoObservable(this)
+		//, {}, { deep: true }
 	}
 
 	// setElements(elements) {
@@ -12,7 +14,8 @@ export default class ElementsStore {
 	// }
 
 	addElement(element) {
-		this._elements.push(element)
+		this._elements.push({ ...element, id: uuid(), order: this._elements.length + 1 })
+		this._elements.sort((a, b) => a.order - b.order);
 	}
 
 	// removeElement(id) {
