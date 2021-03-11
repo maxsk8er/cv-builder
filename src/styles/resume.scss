@@ -1,4 +1,3 @@
-
 ol,
 ul {
 	list-style: none outside none;
@@ -6,19 +5,67 @@ ul {
 	margin: 0;
 }
 
-.resume-holder {
+
+// #root * {
+// 	position: relative;
+// }
+
+
+.main-holder .resume-holder {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
+	overflow: hidden;
+	width: 100%;
+	height: 100vh;
+	box-sizing: border-box;
 }
 
-.resume-holder>section {
-	width: 48%
+.resume-form,
+.resume-preview {
+	box-sizing: border-box;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 100%;
+	
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.resume-form {
+	width: 48%;
 }
 
 .resume-preview {
+	width: 30%;
+	margin: 0 5% 5%;
+	position: relative;
+	padding: 2%;
+}
+
+.resume-preview:before {
+	content: '';
+	left: 0;
+	top: 0;
+	padding-top: 141.45%;
+	z-index: 0;
+	position: absolute;
+	background-color: white;
+	box-shadow: 0 8px 6px -6px black;
+	width: 100%;
+	height: 0;
+}
+
+.resume-preview_section {
 	display: flex;
 	flex-flow: column wrap;
+	z-index: 1;
+	position: relative;
 }
 
 .resume-form,
@@ -58,7 +105,7 @@ ul {
 	font-size: 16px;
 	margin: 0 0 8px 0;
 	padding: 0;
-	box-sizing: content-box;
+	box-sizing: border-box;
 	padding: 4px;
 }
 
@@ -69,6 +116,7 @@ ul {
 	flex-flow: row wrap;
 
 }
+
 .elements-panel>ul>li {
 	margin-right: 8px;
 	cursor: pointer;

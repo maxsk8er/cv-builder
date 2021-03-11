@@ -9,6 +9,7 @@ const Modal = () => {
 	const handleClick = (e) => {
 		e.preventDefault()
 		elementsTemplate.addElement({ ...elemntsSelect[tip], lab: nome })
+		closeModal()
 	}
 
 	const handleChange = (e) => {
@@ -22,10 +23,15 @@ const Modal = () => {
 
 	return (
 		<div
+			onClick={closeModal}
 			className={`${isModalOpen ? 'modal-container isOpen' : 'modal-container'
 				}`}
 		>
-			<div className='modal-content'>
+			<div
+				onClick={e => {
+					e.stopPropagation();
+				}}
+				className='modal-content'>
 				<form>
 					<select name='tip' onChange={handleChange}>
 						{
@@ -47,7 +53,7 @@ const Modal = () => {
         </button>
 				</form>
 				<button className='close-btn' onClick={closeModal}>
-					close
+					cancel
         </button>
 			</div>
 		</div>

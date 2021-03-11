@@ -4,7 +4,7 @@ import ResumePreview from './components/ResumePreview'
 
 const Resume = () => {
 	return (
-		<main>
+		<main className='main-holder'>
 			<AddElement />
 			<div className='resume-holder'>
 				<ResumeForm />

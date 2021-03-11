@@ -1,19 +1,20 @@
-import { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useGlobalContext } from '../utils/context'
 import ReactHtmlParser from 'react-html-parser';
 import FontPicker from "font-picker-react";
 import ReactToPrint from 'react-to-print';
 import { observer } from 'mobx-react-lite'
-
+import useHeight from '../utils/useHeight'
 
 const ResumePreview = observer(() => {
 	const { elementsTemplate } = useGlobalContext()
 	const [font, setFont] = useState({ activeFontFamily: "Open Sans", })
-	const componentRef = useRef();
+	const ref = useRef(null);
+	const [height] = useHeight(ref, [elementsTemplate]);
 
 	return (
-		<div>
-			<section className='resume-preview apply-font' ref={componentRef}>
+		<div className='resume-preview'>
+			<section className='resume-preview_section apply-font' ref={ref}>
 				{
 					elementsTemplate.elements.map((elem) => {
 						if (elem.el === 'textarea') {
@@ -24,6 +25,7 @@ const ResumePreview = observer(() => {
 						}
 					})
 				}
+				<span>Numero de paginas A4: {height}</span>
 			</section>
 			<FontPicker
 				apiKey={process.env.REACT_APP_FONT_API_KEY}
@@ -36,7 +38,7 @@ const ResumePreview = observer(() => {
 			/>
 			<ReactToPrint
 				trigger={() => <button>Print this out!</button>}
-				content={() => componentRef.current}
+				content={() => ref.current}
 			/>
 		</div>
 	)
