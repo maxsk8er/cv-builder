@@ -5,7 +5,7 @@ import { formatDate } from '../utils/utils'
 
 const InputElement = ({ element }) => {
 	const { id, lab, val, tip, el } = element
-	const { elementsTemplate } = useGlobalContext()
+	const { appStore } = useGlobalContext()
 
 	let _val = tip === 'date' ? formatDate(val) : '';
 	if (_val.length <= 0) {
@@ -13,9 +13,9 @@ const InputElement = ({ element }) => {
 	}
 
 	const handleChange = (data) => {
-		elementsTemplate.changeElement(id, data)
+		appStore.changeElement(id, data)
 	}
-	
+
 	if (el === 'textarea') {
 		return (
 			<div className='form-control'>
@@ -23,8 +23,8 @@ const InputElement = ({ element }) => {
 				<CKEditor name={id} id={id}
 					editor={ClassicEditor}
 					data={val}
-					onReady={(editor) => { handleChange(editor.getData()) }}
-					onChange={(event, editor) => { handleChange(editor.getData()) }}
+					onReady={(editor) => { editor ? handleChange(editor.getData()) : console.log('123') }}
+					onChange={(event, editor) => { editor ? handleChange(editor.getData()) : console.log('123') }}
 				/>
 			</div>
 		)

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react'
-import ElementsStore from '../store/elemntsStore';
+import appStore from '../store/appStore';
 
 const AppContext = React.createContext()
-const elementsStore= new ElementsStore()
+const _appStore = new appStore()
 
 const AppProvider = ({ children }) => {
-
+	//const [totalPages, setTotalPages] = useState(0);
 	//const [templateBase, setTemplateBase] = useState(templateBaseObj)
-	// const templateBaseObj =elementsStore.elemnts
+	// const templateBaseObj =appStore.elemnts
 
 	//const [templateBase, setTemplateBase] = useState(templateBaseObj)
 
@@ -30,16 +30,16 @@ const AppProvider = ({ children }) => {
 	// }
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const openModal = () => {
-    setIsModalOpen(true)
-  }
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+		setIsModalOpen(true)
+	}
+	const closeModal = () => {
+		setIsModalOpen(false)
+	}
 
 	const [loading, setLoading] = useState(false)
 
 	return (
-		<AppContext.Provider value={{ elementsTemplate: elementsStore, openModal, closeModal,isModalOpen, loading, setLoading }}>
+		<AppContext.Provider value={{ appStore: _appStore, openModal, closeModal, isModalOpen, loading, setLoading }}>
 			{children}
 		</AppContext.Provider>
 	)

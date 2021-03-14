@@ -1,19 +1,38 @@
-import React, { useState, useLayoutEffect, useCallback } from 'react';
+import React, { useLayoutEffect, useCallback } from 'react';
+import { useGlobalContext } from '../utils/context'
 
-const useHeight = (ref, deps) => {
-	const [height, setHeight] = useState(null);
-	
+const useHeight = (refs, deps) => {
+	const { appStore } = useGlobalContext()
+	//const [height, setHeight] = useState(null);
+
 	// A4 ratio
 	const ratio = 1.41451612903;
 
 	const updateHeight = useCallback(() => {
-		if (ref && ref.current) {
-			const { height, width } = ref.current.getBoundingClientRect();
-			const tHeight = Math.floor(width * ratio);
-			const nPages = Math.floor(height/tHeight)+1;
-			setHeight(nPages);
+		let totalHeight = 0;
+		let pageWidth = 0;
+		if (refs && refs.current) {
+			refs.current.map(ref => {
+				if (ref && ref.current) {
+					const { height, width } = ref.current.getBoundingClientRect();
+					pageWidth=width
+					
+					//const nPages = Math.floor(height / tHeight) + 1
+					totalHeight = totalHeight + height
+					//setHeight(nPages);
+				}
+			})
 		}
-	}, [ref]);
+		const tHeight = Math.floor(pageWidth * ratio)
+		const restHeight = tHeight-totalHeight 
+		//console.log({totalHeight, tHeight,restHeight})
+		console.log({restHeight});
+		if(restHeight<=0){
+			appStore.createNewPage()
+		}
+		return restHeight
+		//appStore.setTotalPages(totalPages)
+	}, [refs]);
 
 	useLayoutEffect(() => {
 		updateHeight();
@@ -21,8 +40,8 @@ const useHeight = (ref, deps) => {
 		// return () => {
 		// 	window.removeEventListener('resize', updateHeight);
 		// }
-	}, [height, deps])
+	}, [appStore.TotalPages, deps])
 
-	return [height]
+	//return [height]
 }
 export default useHeight

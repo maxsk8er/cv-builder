@@ -1,44 +1,68 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { useGlobalContext } from '../utils/context'
-import ReactHtmlParser from 'react-html-parser';
-import FontPicker from "font-picker-react";
+// import FontPicker from "font-picker-react";
 import ReactToPrint from 'react-to-print';
 import { observer } from 'mobx-react-lite'
-import useHeight from '../utils/useHeight'
+
+import ResumePagePreview from './ResumePagePreview'
 
 const ResumePreview = observer(() => {
-	const { elementsTemplate } = useGlobalContext()
-	const [font, setFont] = useState({ activeFontFamily: "Open Sans", })
-	const ref = useRef(null);
-	const [height] = useHeight(ref, [elementsTemplate]);
+	const { appStore } = useGlobalContext()
+	const pages = appStore.allData.pages
+
+	//const [pagesRefs, setPagesRefs] = React.useState([]);
+	// useEffect(() => {
+	// 	setPagesRefs(pagesRefs => {
+	// 		Array(pagesLength).fill().map((_, i) => pagesRefs[i] || useRef(null))
+	// 	});
+	// }, [pagesLength]);
+
+	// const arrLength = arr.length;
+	// const pagesRefs = useRef([]);
+	// const pagesLength = pages.length
+	// if (pagesRefs.current.length !== pagesLength) {
+	// 	pagesRefs.current = Array(pagesLength).fill().map((_, i) => pagesRefs.current[i] || useRef(null));
+	// }
+	
+	appStore.setTotalPages(pages.length)
+	//---FONTS
+	//const [font, setFont] = useState({ activeFontFamily: "Open Sans", })
+
+	//const ref = useRef(null);
+	const printRef = useRef(null);
+
+	// const [length, setLength] = useState(0);
+	// const elemntsRefs = useRef([]);
+	// useLayoutEffect(() => {
+	// 	//const lastRef = elemntsRefs[appStore.elements.length]
+	// 	const rect = elemntsRefs.current.getClientRects()
+	// 	setLength(rect.length)
+	// 	console.log(length)
+	// }, [length, [appStore]])
+
+	
+	// const handleChange = (data) => {
+
+	//}
 
 	return (
-		<div className='resume-preview'>
-			<section className='resume-preview_section apply-font' ref={ref}>
-				{
-					elementsTemplate.elements.map((elem) => {
-						if (elem.el === 'textarea') {
-							const cont = ReactHtmlParser(elem.val)
-							return <div key={elem.id}>{cont}</div>
-						} else {
-							return <span key={elem.id}>{elem.val}</span>
-						}
-					})
-				}
-				<span>Numero de paginas A4: {height}</span>
-			</section>
-			<FontPicker
-				apiKey={process.env.REACT_APP_FONT_API_KEY}
-				activeFontFamily={font.activeFontFamily}
-				onChange={(nextFont) =>
-					setFont({
-						activeFontFamily: nextFont.family,
-					})
-				}
-			/>
+		<div className='resume-preview' >
+			<div className='preview-wrap' ref={printRef}>
+				{pages.map((page, i) => <ResumePagePreview  key={page.id} page={page.content} />)}
+				<span>Numero de paginas A4: {appStore.totalPages}</span>
+				{/* <FontPicker
+					apiKey={process.env.REACT_APP_FONT_API_KEY}
+					activeFontFamily={font.activeFontFamily}
+					onChange={(nextFont) =>
+						setFont({
+							activeFontFamily: nextFont.family,
+						})
+					}
+				/> */}
+			</div>
 			<ReactToPrint
 				trigger={() => <button>Print this out!</button>}
-				content={() => ref.current}
+				content={() => printRef.current}
 			/>
 		</div>
 	)

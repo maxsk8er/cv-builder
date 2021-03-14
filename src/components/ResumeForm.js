@@ -3,13 +3,18 @@ import InputElement from './InputElement'
 import { observer } from 'mobx-react-lite'
 
 const ResumeForm = observer(() => {
-	const { elementsTemplate } = useGlobalContext()
+	const { appStore } = useGlobalContext()
 	return (
 		<section className='resume-form'>
 			<form>
 				{
-					elementsTemplate.elements.map((elem) => {
-						return <InputElement key={elem.id} element={elem} />
+					appStore.allData.pages.map((page) => {
+						if(page.content){
+							return page.content.map((elem) => {
+								//console.log("elem",elem)
+								return <InputElement key={elem.id} element={elem} />
+							})
+						}
 					})
 				}
 			</form>
