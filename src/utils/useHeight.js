@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback } from 'react';
+import { useLayoutEffect, useCallback } from 'react';
 import { useGlobalContext } from '../utils/context'
 
 const useHeight = (refs, deps, pageId) => {
@@ -21,26 +21,27 @@ const useHeight = (refs, deps, pageId) => {
 					totalHeight = totalHeight + height
 					//setHeight(nPages);
 				}
+				return false
 			})
 		}
 		const tHeight = Math.floor(pageWidth * ratio)
 		const restHeight = tHeight-totalHeight 
 		//console.log({totalHeight, tHeight,restHeight})
-		console.log({restHeight,pageId});
+		//console.log({restHeight,pageId});
 		if(restHeight<=0){
 			appStore.createNewPage(pageId)
 		}
 		return restHeight
 		//appStore.setTotalPages(totalPages)
-	}, [refs]);
+	}, [refs, appStore, pageId]);
 
 	useLayoutEffect(() => {
-		updateHeight();
+		updateHeight()
 		// window.addEventListener('resize', updateHeight);
 		// return () => {
 		// 	window.removeEventListener('resize', updateHeight);
 		// }
-	}, [appStore.TotalPages, deps])
+	}, [appStore.TotalPages, deps, updateHeight])
 
 	//return [height]
 }

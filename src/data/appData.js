@@ -1,7 +1,10 @@
 import uuid from 'react-uuid'
 
-const elementsProfile = {
+const appData = {
 	totalPages: 1,
+	config:{
+		themeClass: 'theme02',
+	},
 	pages: [
 		{
 			id: 1,
@@ -10,56 +13,61 @@ const elementsProfile = {
 				{
 					id: uuid(),
 					order: 2,
-					el: 'input',
+					el: 'name',
 					tip: 'text',
 					resTip: 'name',
 					isLab: false,
 					lab: 'Nome',
+					isVal: true,
 					val: 'Maksym Snigirov',
 				},
 				{
 					id: uuid(),
 					order: 1,
-					el: 'input',
+					el: 'position',
 					tip: 'text',
 					isLab: false,
 					lab: 'Posicao',
+					isVal: true,
 					val: 'Front-end Developer'
 				},
 				{
 					id: uuid(),
 					order: 3,
-					el: 'input',
+					el: 'contact',
 					tip: 'email',
 					isLab: false,
 					lab: 'Email',
+					isVal: true,
 					val: '123@gmail.com'
 				},
 				{
 					id: uuid(),
 					order: 4,
-					el: 'input',
+					el: 'contact',
 					tip: 'tel',
 					isLab: false,
 					lab: 'Telemovel',
+					isVal: true,
 					val: '+351 911 111 111'
 				},
 				{
 					id: uuid(),
 					order: 5,
-					el: 'input',
+					el: 'contact',
 					tip: 'url',
 					isLab: false,
 					lab: 'Site',
+					isVal: true,
 					val: 'www.google.com'
 				},
 				{
 					id: uuid(),
 					order: 6,
-					tip: 'date',
-					el: 'input',
+					el: 'date',
 					isLab: false,
 					lab: 'Data Nascimento',
+					isVal: true,
 					val: '1930-05-30'//new Date().toLocaleDateString()
 					//'2000-01-02'
 				},
@@ -70,6 +78,7 @@ const elementsProfile = {
 					el: 'textarea',
 					isLab: true,
 					lab: 'Sobre',
+					isVal: true,
 					val: `<span>Lorem ipsum dolor sit amet,</span> <div class='123'>consectetur adipiscing</div> elit, sed do <i><strong>eiusmod</strong></i> tempor incididunt ut labore et dolore magna aliqua. Sollicitudin ac orci phasellus egestas. Sit amet dictum sit amet. Sed risus ultricies tristique nulla aliquet. Interdum varius sit amet mattis vulputate enim. Nisi est sit amet facilisis magna. Quis vel eros donec ac odio tempor. Donec massa sapien faucibus et molestie ac feugiat sed. Morbi tincidunt ornare massa eget. Eros in cursus turpis massa tincidunt. At tellus at urna condimentum mattis pellentesque id nibh tortor. Eu consequat ac felis donec et odio pellentesque diam volutpat. Senectus et netus et malesuada. Eu sem integer vitae justo eget. In mollis nunc sed id semper risus in. Curabitur gravida arcu ac tortor dignissim. Sit amet risus nullam eget felis eget nunc lobortis. Eget nunc lobortis mattis aliquam faucibus purus in massa.`
 
 		// Aenean vel elit scelerisque mauris pellentesque. Eleifend mi in nulla posuere. Consectetur lorem donec massa sapien faucibus et. Egestas sed tempus urna et pharetra pharetra massa massa. Morbi tincidunt augue interdum velit euismod in pellentesque. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Malesuada fames ac turpis egestas sed tempus.`
@@ -118,4 +127,4 @@ const elementsProfile = {
 		// }
 	]
 }
-export default elementsProfile
+export default appData

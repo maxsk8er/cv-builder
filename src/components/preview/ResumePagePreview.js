@@ -1,7 +1,7 @@
-import React, { useState, createRef, useRef, useLayoutEffect } from 'react';
+import React, { createRef, useRef, useLayoutEffect } from 'react';
 import ReactHtmlParser from 'html-react-parser';
-import useHeight from '../utils/useHeight'
-import { observer } from "mobx-react-lite"
+import useHeight from '../../utils/useHeight'
+//import { observer } from "mobx-react-lite"
 
 
 const ResumePreview = ({ content, pageId }) => {
@@ -51,28 +51,36 @@ const ResumePreview = ({ content, pageId }) => {
 									const cont = ReactHtmlParser(elem.val)
 									return (
 										<>
-											{elem.isLab &&
+											{elem.isLab && elem.isVal &&
 												<h4>{elem.lab}</h4>
 											}
-											<div key={elem.id} ref={refs.current[i]} className='text-element'>{cont}</div>
+											{elem.isVal &&
+												<div key={elem.id} ref={refs.current[i]} className='text-element'>{cont}</div>
+											}
 										</>
 									)
 								} else {
 									if (elem.resTip === 'name') {
 										return (
 											<>
-												{elem.isLab &&
+												{elem.isLab && elem.isVal &&
 													<h4>{elem.lab}</h4>
 												}
-												<h1 key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</h1></>
+												{elem.isVal &&
+													<h1 key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</h1>
+												}
+											</>
 										)
 									} else {
 										return (
 											<>
-												{elem.isLab &&
+												{elem.isLab && elem.isVal &&
 													<h4>{elem.lab}</h4>
 												}
-												<span key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</span></>
+												{elem.isVal &&
+													<span key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</span>
+												}
+											</>
 										)
 									}
 								}

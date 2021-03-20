@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { useGlobalContext } from './utils/context'
-import elemntsSelect from './store/elemntsSelect'
+import { useState } from 'react'
+import { useGlobalContext } from '../../utils/context'
+import elemntsSelect from '../../data/elementsData'
 
 const Modal = () => {
 	const { elementsTemplate, isModalOpen, closeModal } = useGlobalContext()

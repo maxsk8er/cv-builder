@@ -1,14 +1,14 @@
 import { makeAutoObservable } from 'mobx'
-import allData from './appProfile'
 import ReactHtmlParser from 'html-react-parser';
 import uuid from 'react-uuid'
 import ReactDomServer from 'react-dom/server'
+import appData from '../data/appData.js'
 
 export default class ElementsStore {
 
 	constructor() {
 		//console.log("elementsBase",elementsBase);
-		this._allData = allData
+		this._appData = appData
 		makeAutoObservable(this)
 		//, {}, { deep: true }
 	}
@@ -28,22 +28,29 @@ export default class ElementsStore {
 	// }
 
 	changeElement(id, elValue) {
-		this._allData.pages.map(page => {
+		this._appData.pages.map(page => {
 			page.content = page.content.map(el => el.id === id ? { ...el, val: elValue } : el)
 			return page
 		})
 	}
 
 	changeLabel(id, elValue) {
-		this._allData.pages.map(page => {
+		this._appData.pages.map(page => {
 			page.content = page.content.map(el => el.id === id ? { ...el, lab: elValue } : el)
 			return page
 		})
 	}
 	toggleLabel(id, elValue) {
 		console.log({elValue})
-		this._allData.pages.map(page => {
+		this._appData.pages.map(page => {
 			page.content = page.content.map(el => el.id === id ? { ...el, isLab: elValue } : el)
+			return page
+		})
+	}
+	toggleVal(id, elValue) {
+		console.log({elValue})
+		this._appData.pages.map(page => {
+			page.content = page.content.map(el => el.id === id ? { ...el, isVal: elValue } : el)
 			return page
 		})
 	}
@@ -53,9 +60,8 @@ export default class ElementsStore {
 	// }
 	createNewPage(pageId) {
 		console.log("createNewPage")
-		const page = 0
-		//const thisPageContent = [...this._allData.pages[page].content]
-		let lasContent = this._allData.pages.find(p=>p.id===pageId).content.pop()//[...thisPageContent[thisPageContent.length - 1]]
+		//const thisPageContent = [...this._appData.pages[page].content]
+		let lasContent = this._appData.pages.find(p=>p.id===pageId).content.pop()//[...thisPageContent[thisPageContent.length - 1]]
 		let pars = [...ReactHtmlParser(lasContent.val)]//.reverse()
 		//console.log({ pars }, thisPageContent.length)
 		if (pars.length > 0) {
@@ -100,12 +106,12 @@ export default class ElementsStore {
 			// 	lab: 'Sobre',
 			// 	val: lastElementMarkup,
 			// }
-			//this._allData.pages[page].content = []
-			this._allData.pages.find(p=>p.id===pageId).content.push(oldElement)
+			//this._appData.pages[page].content = []
+			this._appData.pages.find(p=>p.id===pageId).content.push(oldElement)
 			// //lastElement
 			newPage.content.push(newElement)
-			this._allData.pages.push(newPage)
-			console.log("pages", this._allData.pages)
+			this._appData.pages.push(newPage)
+			console.log("pages", this._appData.pages)
 			//console.log({ lastElement })npm start
 		}
 		// const elements = pars.map(element => {
@@ -116,15 +122,15 @@ export default class ElementsStore {
 		// 		}
 		// 	}
 		// }
-		// this._allData.totalPages = totalPages
+		// this._appData.totalPages = totalPages
 	}
 	setTotalPages(totalPages) {
-		this._allData.totalPages = totalPages
+		this._appData.totalPages = totalPages
 	}
 	get totalPages() {
-		return this._allData.totalPages
+		return this._appData.totalPages
 	}
-	get allData() {
-		return this._allData
+	get appData() {
+		return this._appData
 	}
 }

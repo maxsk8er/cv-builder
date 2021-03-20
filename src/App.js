@@ -1,18 +1,17 @@
-import React from 'react'
-import Loading from './Loading'
-import Resume from './Resume'
-import { useGlobalContext } from './utils/context'
-
+import AddElement from './components/dashboard/AddElement'
+import ResumeForm from './components/form/ResumeForm'
+import ResumePreview from './components/preview/ResumePreview'
 
 function App() {
-	const {
-    loading,
-  } = useGlobalContext()
-	
-	if (loading) {
-		return <Loading />
-	}
-	return <Resume />
+	return (
+		<main className='main-holder'>
+			<AddElement />
+			<div className='resume-holder'>
+				<ResumeForm />
+				<ResumePreview />
+			</div>
+		</main>
+	)
 }
 
 export default App;

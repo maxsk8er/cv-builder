@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../utils/context'
+import { useGlobalContext } from '../../utils/context'
 import InputElement from './InputElement'
 import { observer } from 'mobx-react-lite'
 
@@ -8,13 +8,16 @@ const ResumeForm = observer(() => {
 		<section className='resume-form'>
 			<form>
 				{
-					appStore.allData.pages.map((page) => {
-						if(page.content){
+					appStore.appData.pages.map((page) => {
+						if (page && page.content) {
 							return page.content.map((elem) => {
-								//console.log("elem",elem)
-								return <InputElement key={elem.id} element={elem} />
+								if (elem) {
+									return <InputElement key={elem.id} element={elem} />
+								}
+								return false
 							})
 						}
+						return false
 					})
 				}
 			</form>

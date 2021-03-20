@@ -1,18 +1,18 @@
-import { useGlobalContext } from '../utils/context'
-import Modal from '../Modal'
+import { useGlobalContext } from '../../utils/context'
+// import Modal from '../modals/Modal'
 
 const AddElement = () => {
-	const { appStore, openModal } = useGlobalContext()
+	const { openModal } = useGlobalContext()
 	const handleClick = () => {
 		openModal()
 		//elementsTemplate.changeElement(id, data)
 	}
 	return (
-		<section className='elements-panel'>
-			<Modal />
+		<section className='dashboard'>
+			{/* <Modal /> */}
 			<ul>
 				<li>
-				{/* () => appStore.addElement(elemntsSelect[0]) */}
+					{/* () => appStore.addElement(elemntsSelect[0]) */}
 					<button className='btn' onClick={handleClick}>
 						Add Input
 					</button>
@@ -20,7 +20,7 @@ const AddElement = () => {
 			</ul>
 		</section>
 	)
-	
+
 }
 
 export default AddElement;
