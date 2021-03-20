@@ -2,9 +2,10 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useGlobalContext } from '../utils/context'
 import { formatDate } from '../utils/utils'
+import LabelElement from './LabelElement'
 
 const InputElement = ({ element }) => {
-	const { id, lab, val, tip, el } = element
+	const { id, lab, isLab, val, tip, el } = element
 	const { appStore } = useGlobalContext()
 
 	let _val = tip === 'date' ? formatDate(val) : '';
@@ -16,10 +17,23 @@ const InputElement = ({ element }) => {
 		appStore.changeElement(id, data)
 	}
 
+	const labelObj = {
+		lab: lab,
+		isLab: isLab,
+		handleChangeLabel: (data) => {
+			appStore.changeLabel(id, data)
+		},
+		handleToggleLabel: (data) => {
+			appStore.toggleLabel(id, data)
+		}
+
+	}
+
 	if (el === 'textarea') {
 		return (
 			<div className='form-control'>
-				<label htmlFor={id}>{lab}</label>
+				<LabelElement labelObj={labelObj} />
+
 				<CKEditor name={id} id={id}
 					editor={ClassicEditor}
 					data={val}
@@ -32,7 +46,7 @@ const InputElement = ({ element }) => {
 
 	return (
 		<div className='form-control'>
-			<label htmlFor={id}>{lab}</label>
+			<LabelElement labelObj={labelObj} />
 			<input type={tip}
 				onChange={(e) => handleChange(e.target.value)}
 				name={id}

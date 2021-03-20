@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useCallback } from 'react';
 import { useGlobalContext } from '../utils/context'
 
-const useHeight = (refs, deps) => {
+const useHeight = (refs, deps, pageId) => {
 	const { appStore } = useGlobalContext()
 	//const [height, setHeight] = useState(null);
 
@@ -26,9 +26,9 @@ const useHeight = (refs, deps) => {
 		const tHeight = Math.floor(pageWidth * ratio)
 		const restHeight = tHeight-totalHeight 
 		//console.log({totalHeight, tHeight,restHeight})
-		console.log({restHeight});
+		console.log({restHeight,pageId});
 		if(restHeight<=0){
-			appStore.createNewPage()
+			appStore.createNewPage(pageId)
 		}
 		return restHeight
 		//appStore.setTotalPages(totalPages)

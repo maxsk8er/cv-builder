@@ -3,7 +3,8 @@ import ReactHtmlParser from 'html-react-parser';
 import useHeight from '../utils/useHeight'
 import { observer } from "mobx-react-lite"
 
-const ResumePreview = ({ page }) => {
+
+const ResumePreview = ({ content, pageId }) => {
 	// --
 	//const content = page[page.length - 1].val
 	// const pars = ReactHtmlParser(content)
@@ -31,12 +32,12 @@ const ResumePreview = ({ page }) => {
 	// 	html: element[0].outerHTML
 	// });
 
-	const refs = useRef(page.map(() => createRef()))
-	const restHeight = useHeight(refs, [page])
+	const refs = useRef(content.map(() => createRef()))
+	const restHeight = useHeight(refs, [content], pageId)
 	useLayoutEffect(() => {
 		//if (restHeight < 0) {
-			console.log("page",restHeight);
-			//	}
+		console.log("page", restHeight);
+		//	}
 	})
 
 	return (
@@ -45,12 +46,35 @@ const ResumePreview = ({ page }) => {
 				<div className="resume-preview_frame">
 					<section className='resume-preview_section apply-font'>
 						{
-							page.map((elem, i) => {
+							content.map((elem, i) => {
 								if (elem.el === 'textarea') {
 									const cont = ReactHtmlParser(elem.val)
-									return <div key={elem.id} ref={refs.current[i]} className='text-element'>{cont}</div>
+									return (
+										<>
+											{elem.isLab &&
+												<h4>{elem.lab}</h4>
+											}
+											<div key={elem.id} ref={refs.current[i]} className='text-element'>{cont}</div>
+										</>
+									)
 								} else {
-									return <span key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</span>
+									if (elem.resTip === 'name') {
+										return (
+											<>
+												{elem.isLab &&
+													<h4>{elem.lab}</h4>
+												}
+												<h1 key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</h1></>
+										)
+									} else {
+										return (
+											<>
+												{elem.isLab &&
+													<h4>{elem.lab}</h4>
+												}
+												<span key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</span></>
+										)
+									}
 								}
 							})
 						}

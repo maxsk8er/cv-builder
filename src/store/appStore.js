@@ -34,19 +34,33 @@ export default class ElementsStore {
 		})
 	}
 
+	changeLabel(id, elValue) {
+		this._allData.pages.map(page => {
+			page.content = page.content.map(el => el.id === id ? { ...el, lab: elValue } : el)
+			return page
+		})
+	}
+	toggleLabel(id, elValue) {
+		console.log({elValue})
+		this._allData.pages.map(page => {
+			page.content = page.content.map(el => el.id === id ? { ...el, isLab: elValue } : el)
+			return page
+		})
+	}
+
 	// get totalPages() {
 	// 	return this._elements
 	// }
-	createNewPage() {
+	createNewPage(pageId) {
 		console.log("createNewPage")
 		const page = 0
 		//const thisPageContent = [...this._allData.pages[page].content]
-		let lasContent = this._allData.pages[page].content.pop()//[...thisPageContent[thisPageContent.length - 1]]
+		let lasContent = this._allData.pages.find(p=>p.id===pageId).content.pop()//[...thisPageContent[thisPageContent.length - 1]]
 		let pars = [...ReactHtmlParser(lasContent.val)]//.reverse()
 		//console.log({ pars }, thisPageContent.length)
 		if (pars.length > 0) {
 			const lastElement = pars.pop();
-			console.log("pars.length",lastElement)
+			console.log("pars.length", lastElement)
 
 			//pars.slice(0).reverse().find(element => {
 			// 		if (element.props) {
@@ -63,11 +77,11 @@ export default class ElementsStore {
 			// console.log({parsMarkup, staticMarkup})
 
 			let newPage = {
-				id: 2,
+				id: pageId+1,
 				order: 3,
 				content: []
 			}
-			const oldElement = { ...lasContent,id: uuid(), val: parsMarkup }
+			const oldElement = { ...lasContent, id: uuid(), val: parsMarkup }
 			// {
 			// 	id: uuid(),
 			// 	order: 7,
@@ -76,8 +90,8 @@ export default class ElementsStore {
 			// 	lab: 'Sobre',
 			// 	val: parsMarkup,
 			// }
-			const newElement = { ...lasContent,id: uuid(), val: lastElementMarkup }
-			console.log({oldElement,newElement})
+			const newElement = { ...lasContent, id: uuid(), val: lastElementMarkup }
+			console.log({ oldElement, newElement })
 			// {
 			// 	id: uuid(),
 			// 	order: 7,
@@ -87,12 +101,12 @@ export default class ElementsStore {
 			// 	val: lastElementMarkup,
 			// }
 			//this._allData.pages[page].content = []
-			this._allData.pages[page].content.push(oldElement)
+			this._allData.pages.find(p=>p.id===pageId).content.push(oldElement)
 			// //lastElement
 			newPage.content.push(newElement)
 			this._allData.pages.push(newPage)
 			console.log("pages", this._allData.pages)
-			//console.log({ lastElement })
+			//console.log({ lastElement })npm start
 		}
 		// const elements = pars.map(element => {
 		// 		if (element.props) {
