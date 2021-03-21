@@ -13,8 +13,8 @@ const InputElement = ({ labelObj }) => {
 						className='check-is-lab toggle-input'
 						defaultChecked={isLab}
 						onChange={(e) => handleToggleLabel(e.target.checked)} />
-					<label class="toggle radio" for={id}>
-						<div class="toggle-inner"></div>
+					<label className="toggle radio" htmlFor={id}>
+						<div className="toggle-inner"></div>
 					</label>
 				</>
 			}

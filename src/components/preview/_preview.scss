@@ -100,7 +100,18 @@ $lineHeightH1: calc(#{$baseLine}*3/#{$fontSizeH1});
 	top: 0;
 	bottom: 0;
 }
-
+.resume-preview_section .img-element {
+	// float: right;
+	align-self: flex-end;
+	max-width: 10vw;
+	max-height: 20vw;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	margin: 0px 20px 20px 0;
+	vertical-align: baseline;
+}
+.resume-preview_section .element-wrap,
 .resume-preview_section span,
 .resume-preview_section .text-element p,
 .resume-preview_section h4,
@@ -111,7 +122,10 @@ $lineHeightH1: calc(#{$baseLine}*3/#{$fontSizeH1});
 	border: 0;
 	margin: 0;
 }
-
+.resume-preview_section .element-wrap,
+.resume-preview_section .element-wrap *{
+	display: block;
+}
 
 .resume-preview_section span {
 	@include vr($fontSize);

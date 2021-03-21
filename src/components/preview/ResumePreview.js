@@ -8,7 +8,7 @@ import ResumePagePreview from './ResumePagePreview'
 const ResumePreview = observer(() => {
 	const { appStore } = useGlobalContext()
 	const pages = appStore.appData.pages
-	const theme = appStore.appData.themeClass
+	const theme = appStore.appData.config.themeClass
 
 	appStore.setTotalPages(pages.length)
 	const printRef = useRef(null);
@@ -16,7 +16,7 @@ const ResumePreview = observer(() => {
 	return (
 		<div className={'resume-preview ' + theme} >
 			<div className='preview-wrap' ref={printRef}>
-				{pages.map((page, i) => <ResumePagePreview key={page.id} content={page.content} pageId={page.id} />)}
+				{pages.map((page, i) => <ResumePagePreview key={page.id} content={page.content} theme={theme} pageId={page.id} />)}
 				<span>Numero de paginas A4: {appStore.totalPages}</span>
 			</div>
 			<ReactToPrint

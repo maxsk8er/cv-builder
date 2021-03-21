@@ -1,10 +1,11 @@
-import React, { createRef, useRef, useLayoutEffect } from 'react';
-import ReactHtmlParser from 'html-react-parser';
-import useHeight from '../../utils/useHeight'
+// import React, { createRef, useRef, useLayoutEffect } from 'react';
+// import ReactHtmlParser from 'html-react-parser';
+// import useHeight from '../../utils/useHeight'
 //import { observer } from "mobx-react-lite"
+import Theme01 from './templates/theme01/Theme01'
+import Theme02 from './templates/theme02/Theme02'
 
-
-const ResumePreview = ({ content, pageId }) => {
+const ResumePreview = ({ content, pageId, theme }) => {
 	// --
 	//const content = page[page.length - 1].val
 	// const pars = ReactHtmlParser(content)
@@ -32,60 +33,33 @@ const ResumePreview = ({ content, pageId }) => {
 	// 	html: element[0].outerHTML
 	// });
 
-	const refs = useRef(content.map(() => createRef()))
-	const restHeight = useHeight(refs, [content], pageId)
-	useLayoutEffect(() => {
-		//if (restHeight < 0) {
-		console.log("page", restHeight);
-		//	}
-	})
+	// const refs = useRef(content.map(() => createRef()))
+	// const restHeight = useHeight(refs, [content], pageId)
+	// useLayoutEffect(() => {
+	// 	//if (restHeight < 0) {
+	// 	console.log("page", restHeight);
+	// 	//	}
+	// })
+
+
+	const renderSwitch = (theme) => {
+		switch (theme) {
+			case 'theme01':
+				return <Theme01 content={content} />
+			case 'theme02':
+				return <Theme02 content={content} />
+
+			default:
+				return false
+		}
+	}
 
 	return (
 		<div className="resume-preview_block">
 			<div className="resume-preview_abs">
 				<div className="resume-preview_frame">
 					<section className='resume-preview_section apply-font'>
-						{
-							content.map((elem, i) => {
-								if (elem.el === 'textarea') {
-									const cont = ReactHtmlParser(elem.val)
-									return (
-										<>
-											{elem.isLab && elem.isVal &&
-												<h4>{elem.lab}</h4>
-											}
-											{elem.isVal &&
-												<div key={elem.id} ref={refs.current[i]} className='text-element'>{cont}</div>
-											}
-										</>
-									)
-								} else {
-									if (elem.resTip === 'name') {
-										return (
-											<>
-												{elem.isLab && elem.isVal &&
-													<h4>{elem.lab}</h4>
-												}
-												{elem.isVal &&
-													<h1 key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</h1>
-												}
-											</>
-										)
-									} else {
-										return (
-											<>
-												{elem.isLab && elem.isVal &&
-													<h4>{elem.lab}</h4>
-												}
-												{elem.isVal &&
-													<span key={elem.id} ref={refs.current[i]} className='text-element'>{elem.val}</span>
-												}
-											</>
-										)
-									}
-								}
-							})
-						}
+						{renderSwitch(theme)}
 					</section>
 				</div>
 			</div>

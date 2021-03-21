@@ -17,6 +17,7 @@
     "mobx-react-lite": "^3.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-image-file-resizer": "^0.4.2",
     "react-scripts": "4.0.3",
     "react-to-print": "^2.12.3",
     "react-uuid": "^1.0.2",

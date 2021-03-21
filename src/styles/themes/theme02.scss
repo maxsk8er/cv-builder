@@ -1,3 +1,39 @@
-.theme02{
-	color:black;
-}
+// .theme02 {
+// 	color: black;
+// }
+
+// .theme02 .resume-preview_section {
+// 	display: grid;
+// 	grid-template-columns: 2fr 1fr;
+// 	grid-template-rows: 1fr;
+// 	// box-shadow           : 0 5px 9px 0 rgba(0, 0, 0, 0.35);
+// 	grid-gap: 5px;
+// 	grid-template-areas:
+// 		"left  right"
+// 		"left  right"
+// 		"left  right"
+// 		"left  right";
+// 	counter-reset: div;
+// 	grid-auto-rows: minmax(min-content, max-content);
+// 	align-items: start;
+// 	align-self: start;
+// 	margin-bottom: auto;
+// }
+
+// .theme02 .left,
+// .theme02 .right {
+// 	align-self: start;
+// 	margin-bottom: auto;
+// 	&:before {
+// 		content: counter(div);
+// 	}
+// }
+
+// .left {
+// 	// grid-area: left;
+// }
+
+// .right {
+// 	// grid-area: right;
+// 	grid-column-start: 2;
+// }
